@@ -1,0 +1,1 @@
+function n(){return{scrollToId:o=>{const t=document.getElementById(o);if(!t){console.warn(`Element with id "${o}" not found.`);return}t.scrollIntoView({behavior:"smooth",block:"start"})}}}export{n as u};
