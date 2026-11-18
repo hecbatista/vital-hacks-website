@@ -1,44 +1,49 @@
 <script setup lang="ts">
 import { ref, defineAsyncComponent } from "vue";
+import { CURRENT_EVENT, SECTIONS } from "@/constants/event";
+import { NAV_LINKS } from "@/constants/navLinks";
 
 const isMenuOpen = ref(false);
-const isNavVisible = ref(true); // New ref for nav visibility
+const isNavVisible = ref(true);
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
 };
 
-// Toggle nav visibility function
-const toggleNavVisibility = () => {
-  isNavVisible.value = !isNavVisible.value;
-};
-
 // Lazy load components
-const TabBar = defineAsyncComponent(() => import("./components/TabBar.vue"));
-const Countdown = defineAsyncComponent(
-  () => import("./components/Countdown.vue")
+const TabBar = defineAsyncComponent(
+  () => import("./components/layout/TabBar.vue")
 );
-const About = defineAsyncComponent(() => import("./components/About.vue"));
-const Register = defineAsyncComponent(
-  () => import("./components/Register.vue")
+const ComingSoon = defineAsyncComponent(
+  () => import("./components/sections/ComingSoon.vue")
+);
+const Countdown = defineAsyncComponent(
+  () => import("./components/sections/Countdown.vue")
+);
+const About = defineAsyncComponent(
+  () => import("./components/sections/About.vue")
+);
+const Keynote = defineAsyncComponent(
+  () => import("./components/sections/Keynote.vue")
 );
 const Timeline = defineAsyncComponent(
-  () => import("./components/Timeline.vue")
+  () => import("./components/sections/Timeline.vue")
 );
-const FAQ = defineAsyncComponent(() => import("./components/FAQ.vue"));
-const Team = defineAsyncComponent(() => import("./components/Team.vue"));
-const RegistrationClosed = defineAsyncComponent(
-  () => import("./components/RegistrationClosed.vue")
+const Prompt = defineAsyncComponent(
+  () => import("./components/sections/Prompt.vue")
 );
-const Details = defineAsyncComponent(() => import("./components/Details.vue"));
-const Submit = defineAsyncComponent(() => import("./components/Submit.vue"));
-const EventTimeline = defineAsyncComponent(
-  () => import("./components/EventTimeline.vue")
+const Register = defineAsyncComponent(
+  () => import("./components/sections/Register.vue")
 );
-const DownloadTimeline = defineAsyncComponent(
-  () => import("./components/DownloadTimeline.vue")
+const Submit = defineAsyncComponent(
+  () => import("./components/sections/Submit.vue")
 );
-const Prompt = defineAsyncComponent(() => import("./components/Prompt.vue"));
-const Keynote = defineAsyncComponent(() => import("./components/Keynote.vue"));
+const FAQ = defineAsyncComponent(() => import("./components/sections/FAQ.vue"));
+const Team = defineAsyncComponent(
+  () => import("./components/sections/Team.vue")
+);
+const PastYears = defineAsyncComponent(
+  () => import("./components/sections/PastYears.vue")
+);
 </script>
 
 <template>
@@ -86,29 +91,12 @@ const Keynote = defineAsyncComponent(() => import("./components/Keynote.vue"));
         class="bg-[#001049] border-t border-gray-800 fixed inset-0 overflow-y-auto mt-12"
         @click="toggleMenu"
       >
-        <a href="#timeline" class="block px-4 py-2 text-white hover:bg-gray-800"
-          >Schedule</a
-        >
-        <a href="#speaker" class="block px-4 py-2 text-white hover:bg-gray-800"
-          >Keynote Speaker</a
-        >
-        <a href="#prompt" class="block px-4 py-2 text-white hover:bg-gray-800"
-          >Prompt</a
-        >
-        <a href="#submit" class="block px-4 py-2 text-white hover:bg-gray-800"
-          >Submit</a
-        >
-        <a href="#about" class="block px-4 py-2 text-white hover:bg-gray-800"
-          >About</a
-        >
-        <a href="#register" class="block px-4 py-2 text-white hover:bg-gray-800"
-          >Register</a
-        >
-        <a href="#faq" class="block px-4 py-2 text-white hover:bg-gray-800"
-          >FAQ</a
-        >
-        <a href="#team" class="block px-4 py-2 text-white hover:bg-gray-800"
-          >Team</a
+        <a
+          v-for="link in NAV_LINKS"
+          :key="link.id"
+          :href="`#${link.id}`"
+          class="block px-4 py-2 text-white hover:bg-gray-800"
+          >{{ link.label }}</a
         >
       </div>
     </nav>
@@ -120,6 +108,10 @@ const Keynote = defineAsyncComponent(() => import("./components/Keynote.vue"));
     <div class="flex flex-col space-y-16">
       <section class="flex flex-col items-center justify-center space-y-8">
         <img src="/main_logo.svg" alt="Main Logo" class="w-2/3 max-w-xl" />
+        <Countdown v-if="SECTIONS.countdown" />
+      </section>
+      <section v-if="SECTIONS.comingSoon" id="coming-soon">
+        <ComingSoon />
       </section>
       <section id="about" class="scroll-mt-32 pb-20">
         <div class="relative mt-12">
@@ -136,39 +128,40 @@ const Keynote = defineAsyncComponent(() => import("./components/Keynote.vue"));
           />
         </div>
       </section>
-      <section id="speaker" class="scroll-mt-32">
+      <section v-if="SECTIONS.keynote" id="speaker" class="scroll-mt-32">
         <Keynote />
       </section>
-      <section id="register" class="scroll-mt-32">
-        <RegistrationClosed />
+      <section v-if="SECTIONS.schedule" id="timeline" class="scroll-mt-32">
+        <Timeline />
+      </section>
+      <section v-if="SECTIONS.prompt" id="prompt" class="scroll-mt-32">
+        <Prompt />
+      </section>
+      <section v-if="SECTIONS.register" id="register" class="scroll-mt-32">
+        <Register />
+      </section>
+      <section v-if="SECTIONS.submit" id="submit" class="scroll-mt-32">
+        <Submit />
       </section>
       <section id="faq" class="scroll-mt-32">
         <FAQ />
       </section>
-      <section id="team" class="scroll-mt-32">
+      <section v-if="SECTIONS.team" id="team" class="scroll-mt-32">
         <Team />
+      </section>
+      <section id="past-years" class="scroll-mt-32">
+        <PastYears />
       </section>
     </div>
   </main>
 
-  <footer class="px-4">
+  <footer class="px-4 mt-16">
     <hr class="border-t-3" />
-    <div class="mt-2 mb-8">&copy; Vital Hacks 2026</div>
+    <div class="mt-2 mb-8">&copy; ViTAL Hacks {{ CURRENT_EVENT.year }}</div>
   </footer>
 </template>
 
 <style scoped>
-.mobile-menu-enter-active,
-.mobile-menu-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.mobile-menu-enter-from,
-.mobile-menu-leave-to {
-  opacity: 0;
-}
-
-/* Smooth transition for main content */
 main {
   transition: padding-top 0.3s ease;
 }

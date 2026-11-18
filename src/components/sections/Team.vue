@@ -1,84 +1,45 @@
 <script setup lang="ts">
-import TeamMember from "./TeamMember.vue";
+import TeamMember from "../common/TeamMember.vue";
+import { TEAM } from "@/constants/team";
+import { CURRENT_EVENT } from "@/constants/event";
+
+// The first group (the director) gets its own row on top; the rest share
+// equal columns underneath.
+const [leadGroup, ...otherGroups] = TEAM;
 </script>
 
 <template>
   <div class="text-center">
-    <h3 class="mb-6">Team</h3>
-    <h6 class="text-lg font-semibold mb-6">ViTAL Hacks Director</h6>
-    <div class="flex justify-center gap-8 mb-2">
-      <div class="flex flex-col items-center">
+    <h3 class="mb-6">{{ CURRENT_EVENT.year }} Team</h3>
+
+    <div v-if="leadGroup" class="mb-12">
+      <h6 class="text-lg font-semibold mt-2 mb-4">{{ leadGroup.role }}</h6>
+      <div class="flex flex-wrap justify-center gap-8">
         <TeamMember
-          src="/members/aria.jpg"
-          alt="Aria"
-          caption="Aria Agarwal"
-          contact="https://www.linkedin.com/in/aria-agarwal-4a11b629a/"
+          v-for="(member, i) in leadGroup.members"
+          :key="leadGroup.role + i"
+          :src="member.photo"
+          :alt="member.name"
+          :caption="member.name"
+          :contact="member.linkedin"
         />
       </div>
     </div>
 
-    <div class="flex flex-wrap justify-center gap-8 mb-2">
-      <div>
-        <h6 class="text-lg font-semibold mt-2 mb-4">Event & Relations</h6>
-        <div class="flex justify-center gap-8">
-          <div class="flex flex-col items-center">
-            <TeamMember
-              src="/members/jakob.jpg"
-              alt="Jakob"
-              caption="Jakob Clark"
-              contact="https://www.linkedin.com/in/jakob-clark-/"
-            />
-          </div>
-          <div class="flex flex-col items-center">
-            <TeamMember
-              src="/members/thillai.jpg"
-              alt="Thillai"
-              caption="Thillai Sudhakar"
-              contact="https://www.linkedin.com/in/thillai-sudhakar/"
-            />
-          </div>
+    <div class="grid gap-y-12 gap-x-6 lg:grid-cols-3">
+      <div v-for="group in otherGroups" :key="group.role">
+        <h6 class="text-lg font-semibold mt-2 mb-4">{{ group.role }}</h6>
+        <div class="flex flex-wrap justify-center gap-6">
+          <TeamMember
+            v-for="(member, i) in group.members"
+            :key="group.role + i"
+            :src="member.photo"
+            :alt="member.name"
+            :caption="member.name"
+            :contact="member.linkedin"
+            compact
+          />
         </div>
-      </div>
-
-      <div>
-        <h6 class="text-lg font-semibold mt-2 mb-4">Project Organizers</h6>
-        <div class="flex justify-center gap-8">
-          <div class="flex flex-col items-center">
-            <TeamMember
-              src="/members/oscar.jpg"
-              alt="Aria"
-              caption="Oscar Ji"
-              contact="https://www.linkedin.com/in/oscar-ji/"
-            />
-          </div>
-          <div class="flex flex-col items-center">
-            <TeamMember
-              src="/members/jaena.jpg"
-              alt="JaeNa"
-              caption="Jaena Wray"
-              contact="https://www.linkedin.com/in/jaenawray/"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-    <h6 class="text-lg font-semibold">Software Experts</h6>
-    <div class="flex justify-center gap-8 mb-2">
-      <div class="flex flex-col items-center">
-        <TeamMember
-          src="/members/curie.JPG"
-          alt="Curie"
-          caption="Curie Cha"
-          contact="https://www.linkedin.com/in/curiecha"
-        />
-      </div>
-      <div class="flex flex-col items-center">
-        <TeamMember
-          src="/members/vaishnavi.png"
-          alt="Vaishnavi"
-          caption="Vaishnavi Chebrolu"
-          contact="https://www.linkedin.com/in/vaishnavi-chebrolu-79b8321b6/"
-        />
       </div>
     </div>
   </div>

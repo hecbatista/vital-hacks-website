@@ -21,10 +21,60 @@ a,
   }
 }
 
+/* The decorative node icons around About poke past the screen edge;
+   clip them instead of letting the page scroll sideways. */
+html,
+body {
+  overflow-x: clip;
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   line-height: 1.6;
+}
+
+/* Panel styled like the site's circuit lines: square corners, a 2px white
+   line, and hollow circle "nodes" on two opposite corners (matching the
+   node icons around About). */
+.node-frame {
+  position: relative;
+  border: 2px solid #fff;
+  border-radius: 0;
+  background-color: rgba(59, 69, 104, 0.35); /* logo's slate squares */
+}
+
+.node-frame::before,
+.node-frame::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background-color: #001049;
+}
+
+.node-frame::before {
+  top: -8px;
+  left: -8px;
+}
+
+.node-frame::after {
+  bottom: -8px;
+  right: -8px;
+}
+
+/* Square-cornered outline button to go with .node-frame */
+.line-button {
+  border: 2px solid #fff;
+  border-radius: 0;
+  color: #fff;
+  text-decoration: none;
+}
+
+.line-button:hover {
+  background-color: #615fff;
 }
 
 #app {

@@ -2,7 +2,7 @@
   <div class="mb-8 flex flex-col items-center">
     <!-- Submit Button -->
     <a
-      href="https://vital-hacks.devpost.com/"
+      :href="devpostUrl"
       target="_blank"
       class="w-full max-w-xs border-2 text-white rounded-lg hover:bg-blue-500 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
     >
@@ -13,7 +13,7 @@
 
     <!-- Info Icon with Tooltip -->
     <div class="relative flex items-center justify-center mt-4" id="info-icon">
-      <a href="/devpost_info.pdf" target="_blank">
+      <a :href="manualUrl" target="_blank">
         <img src="/info.svg" alt="Info" class="w-8 h-8 cursor-pointer" />
       </a>
       <!-- Tooltip -->
@@ -32,7 +32,16 @@
 </template>
 
 <script>
+import { CURRENT_EVENT } from "@/constants/event";
+import { publicUrl } from "@/utils/publicUrl";
+
 export default {
+  data() {
+    return {
+      devpostUrl: CURRENT_EVENT.devpostUrl ?? "#",
+      manualUrl: publicUrl("/devpost_info.pdf"),
+    };
+  },
   mounted() {
     const infoIcon = document.getElementById("info-icon");
     const tooltip = document.getElementById("tooltip");

@@ -2,7 +2,7 @@
   <div class="hackathon-prompt">
     <div class="flex content-center text-center justify-center">
       <h1 class="challenge-header">THE CHALLENGE</h1>
-      <a href="/prompt.pdf" target="_blank">
+      <a :href="promptUrl" target="_blank">
         <img src="/download_icon.svg" alt="Info" class="w-8 h-8 cursor-pointer" />
       </a>
     </div>
@@ -189,3 +189,9 @@
   }
 }
 </style>
+
+<script setup lang="ts">
+import { publicUrl } from "@/utils/publicUrl";
+
+const promptUrl = publicUrl("/prompt.pdf");
+</script>

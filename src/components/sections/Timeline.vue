@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { WORKSHOP_TIMELINE } from "@/constants/timeline";
+import { CURRENT_EVENT } from "@/constants/event";
 </script>
 
 <template>
   <div class="timeline-container">
     <div class="timeline mb-36">
       <div
-        v-for="(item, index) in WORKSHOP_TIMELINE"
-        :key="item.title"
+        v-for="(item, index) in CURRENT_EVENT.schedule"
+        :key="item.date + item.description"
         class="timeline-item"
         :class="{
           'timeline-item-top': index % 2 === 0,
@@ -15,7 +15,7 @@ import { WORKSHOP_TIMELINE } from "@/constants/timeline";
         }"
       >
         <div class="timeline-content">
-          <h4>{{ item.title }}</h4>
+          <h4>{{ item.date }}</h4>
           <p class="description">{{ item.description }}</p>
           <p class="location">{{ item.location }}</p>
         </div>

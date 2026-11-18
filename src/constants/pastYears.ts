@@ -1,0 +1,100 @@
+// Past ViTAL Hacks events, newest first. Add the finished year here once an
+// event is over.
+
+export interface PastMember {
+  name: string;
+  linkedin: string;
+}
+
+export interface PastTeamGroup {
+  role: string;
+  members: PastMember[];
+}
+
+export interface PastYear {
+  year: number;
+  theme: string;
+  date: string;
+  location: string;
+  keynote: string;
+  devpostUrl: string;
+  team: PastTeamGroup[];
+}
+
+export const PAST_YEARS: PastYear[] = [
+  {
+    year: 2026,
+    theme: "Healthcare Literacy",
+    date: "March 21, 2026",
+    location: "Alumni Center",
+    keynote: "Kylie Ariel Bemis, Ph.D.",
+    devpostUrl: "https://vital-hacks-2026.devpost.com/",
+    team: [
+      {
+        role: "ViTAL Hacks Director",
+        members: [
+          { name: "Aria Agarwal", linkedin: "https://www.linkedin.com/in/aria-agarwal-4a11b629a/" },
+        ],
+      },
+      {
+        role: "Event & Relations",
+        members: [
+          { name: "Jakob Clark", linkedin: "https://www.linkedin.com/in/jakob-clark-/" },
+          { name: "Thillai Sudhakar", linkedin: "https://www.linkedin.com/in/thillai-sudhakar/" },
+        ],
+      },
+      {
+        role: "Project Organizers",
+        members: [
+          { name: "Oscar Ji", linkedin: "https://www.linkedin.com/in/oscar-ji/" },
+          { name: "Jaena Wray", linkedin: "https://www.linkedin.com/in/jaenawray/" },
+        ],
+      },
+      {
+        role: "Software Experts",
+        members: [
+          { name: "Curie Cha", linkedin: "https://www.linkedin.com/in/curiecha" },
+          { name: "Vaishnavi Chebrolu", linkedin: "https://www.linkedin.com/in/vaishnavi-chebrolu-79b8321b6/" },
+        ],
+      },
+    ],
+  },
+  {
+    year: 2025,
+    theme: "Preventive Healthcare",
+    date: "March 29, 2025",
+    location: "EV002",
+    keynote: "Jared R. Auclair, PhD",
+    devpostUrl: "https://vital-hacks.devpost.com/",
+    team: [
+      {
+        role: "ViTAL Co-Executive Directors",
+        members: [
+          { name: "Adam Kwoh", linkedin: "https://www.linkedin.com/in/adam-kwoh/" },
+          { name: "Virali Patel", linkedin: "https://www.linkedin.com/in/viralipatel1025/" },
+        ],
+      },
+      {
+        role: "Event & Relations",
+        members: [
+          { name: "Jakob Clark", linkedin: "https://www.linkedin.com/in/jakob-clark-/" },
+          { name: "Thillai Sudhakar", linkedin: "https://www.linkedin.com/in/thillai-sudhakar/" },
+        ],
+      },
+      {
+        role: "Project Organizers",
+        members: [
+          { name: "Aria Agarwal", linkedin: "https://www.linkedin.com/in/aria-agarwal-4a11b629a/" },
+          { name: "Jae Na Wray", linkedin: "https://www.linkedin.com/in/jaenawray/" },
+        ],
+      },
+      {
+        role: "Software Experts",
+        members: [
+          { name: "Curie Cha", linkedin: "https://www.linkedin.com/in/curiecha" },
+          { name: "Vaishnavi Chebrolu", linkedin: "https://www.linkedin.com/in/vaishnavi-chebrolu-79b8321b6/" },
+        ],
+      },
+    ],
+  },
+];

@@ -12,7 +12,7 @@ export const FAQ_ITEMS: FAQItem[] = [
   {
     question: "Who can participate?",
     answer:
-      "Undergraduates in the Greater Boston area of all majors, backgrounds, and experience levels are allowed to participate. Beginners are especialy encouraged to register!",
+      "Undergraduates in the Greater Boston area of all majors, backgrounds, and experience levels are allowed to participate. Beginners are especially encouraged to register!",
   },
   {
     question: "What if I don't have a team?",

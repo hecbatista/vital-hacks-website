@@ -2,9 +2,15 @@
 import { ref, onMounted } from "vue";
 import VueCountdown from "@chenfengyuan/vue-countdown";
 
+import { CURRENT_EVENT } from "@/constants/event";
+
+// Counts down to when hacking ends. Stays at zero until a date is set in
+// src/constants/event.ts.
 const now = new Date();
-const target = new Date(Date.UTC(now.getFullYear(), 2, 29, 21, 30, 0)); // March 29, 5:30 PM ET -> 9:30 PM UTC
-let timeRemaining = target.getTime() - now.getTime();
+const target = CURRENT_EVENT.hackingEndsAt
+  ? new Date(CURRENT_EVENT.hackingEndsAt)
+  : null;
+const timeRemaining = target ? target.getTime() - now.getTime() : 0;
 const time = ref(timeRemaining > 0 ? timeRemaining : 0);
 
 const prevDays = ref(0);
