@@ -1,0 +1,1 @@
+function r(){return{scrollToId:o=>{const e=document.getElementById(o);if(!e){console.warn(`Element with id "${o}" not found.`);return}const t=window.matchMedia("(prefers-reduced-motion: reduce)").matches;e.scrollIntoView({behavior:t?"auto":"smooth",block:"start"})}}}export{r as u};
